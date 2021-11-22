@@ -19,6 +19,8 @@ You can run your application in dev mode that enables live coding using:
 
 ## Contributing
 
+This project follows `git-flow`: on adding a new feature, fixing a bug or similar tasks, create a branch named `<feature/bugfix/hotfix/...>/<item-name>` from the `main` branch. After testing, merge it to the `development` branch and, after validation, merge it to the `main` branch.
+
 
 ## Framework
 
