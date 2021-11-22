@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "03672ea3-f5a2-425a-8948-d84703c8b0c6",
+		"name": "PaymentRoutine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAccount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/{{api_version}}/accounts/1",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
