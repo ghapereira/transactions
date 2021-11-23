@@ -10,12 +10,11 @@ import static org.hamcrest.CoreMatchers.is;
 public class TransactionTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testGetAccountsInfoOnlyAcceptsIntegers() {
         given()
-          .when().get("/hello")
-          .then()
-             .statusCode(200)
-             .body(is("Hello RESTEasy"));
+            .when().get("/v1/accounts/a")
+            .then()
+            .statusCode(404);
     }
 
 }
