@@ -14,7 +14,7 @@ public class AccountResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response createAccount(AccountCreatorEntity accountCreator) {
         return Response.ok("Created account with document " + accountCreator.document_number).build();
     }
