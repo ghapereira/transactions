@@ -6,26 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "GetAccount",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{host}}/{{api_version}}/accounts/{{account_id}}",
-					"protocol": "http",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"{{api_version}}",
-						"accounts",
-						"{{account_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "CreateAccount",
 			"request": {
 				"method": "POST",
@@ -48,6 +28,54 @@
 					"path": [
 						"{{api_version}}",
 						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/{{api_version}}/accounts/{{account_id}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"accounts",
+						"{{account_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_id\": 1,\n    \"operation_type_id\": 4,\n    \"amount\": 123.45\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/{{api_version}}/transactions",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"transactions"
 					]
 				}
 			},

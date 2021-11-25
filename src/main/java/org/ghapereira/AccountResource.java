@@ -1,6 +1,5 @@
 package org.ghapereira;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,7 +21,7 @@ public class AccountResource {
     @Path("{id:\\d+}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAccountInfo() {
-        return "{\"account_id\": 1, \"document_number\": \"1234567890\"}";
+    public Response getAccountInfo() {
+        return Response.ok("{\"account_id\": 1, \"document_number\": \"1234567890\"}").build();
     }
 }
