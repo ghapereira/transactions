@@ -2,7 +2,7 @@
 
 # Start the test database as a standalone Docker container
 
-DATABASE_DATA_DIR=postgres-data
+DATABASE_DATA_DIR="/$(pwd)/data/postgres-data"
 POSTGRES_PASSWORD=atestpasswordnonprod
 CONTAINER_POSTGRES_DATA_DIR=/var/lib/postgresql/data
 POSTGRES_INNER_PORT=5432
