@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
@@ -36,7 +37,8 @@ public class AccountResource {
     @Path("{id:\\d+}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAccountInfo() {
-        return Response.ok("{\"account_id\": 1, \"document_number\": \"1234567890\"}").build();
+    public Response getAccountInfo(@PathParam("id") Long id) {
+        Account account = accountRepository.findById(id);
+        return Response.ok(account).build();
     }
 }

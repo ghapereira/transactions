@@ -44,5 +44,4 @@ public class TransactionTest {
 
         Assertions.assertEquals(422, response.statusCode());
     }
-
 }

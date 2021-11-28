@@ -31,6 +31,8 @@ You can run your application in dev mode that enables live coding using:
 
 ## Tests
 
+To run the tests from the command line, in the root directory use the command `mvn verify`. You can also, on your IDE, run the tests individually (tested in VSCode).
+
 ## Contributing
 
 This project follows `git-flow`: on adding a new feature, fixing a bug or similar tasks, create a branch named `<feature/bugfix/hotfix/...>/<item-name>` from the `main` branch. After testing, merge it to the `development` branch and, after validation, merge it to the `main` branch.

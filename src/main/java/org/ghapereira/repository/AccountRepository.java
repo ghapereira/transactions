@@ -13,6 +13,7 @@ public class AccountRepository implements PanacheRepository<Account> {
     }
 
     public Account findById(Long id) {
-        return find("id", id).firstResult();
+        Account account = find("id", id).firstResult();
+        return account;
     }
  }
