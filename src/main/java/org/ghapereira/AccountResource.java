@@ -1,7 +1,7 @@
 package org.ghapereira;
 
 import org.ghapereira.domain.Account;
-import org.ghapereira.repository.AccountRepository;
+import org.ghapereira.exceptions.BusinessException;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -18,19 +18,21 @@ import javax.ws.rs.core.Response;
 @Path("/v1/accounts/")
 public class AccountResource {
     @Inject
-    AccountRepository accountRepository;
+    AccountService accountService;
 
     @POST
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createAccount(Account account) {
-        if (account.getDocumentNumber() == null) {
-            // TODO use value from library for HTTP status
-            throw new WebApplicationException("Document number must be provided", 422);
+        try {
+            accountService.createAccount(account);
+        } catch (BusinessException b) {
+            throw new WebApplicationException(b.getMessage(), 422);
         }
 
-        accountRepository.persist(account);
+        // TODO use value from library for HTTP status
+
         return Response.ok(account).status(201).build();
     }
 
@@ -38,7 +40,14 @@ public class AccountResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccountInfo(@PathParam("id") Long id) {
-        Account account = accountRepository.findById(id);
+        Account account;
+
+        try {
+            account = accountService.getAccountInfo(id);
+        } catch (BusinessException b) {
+            throw new WebApplicationException(b.getMessage(), 422);
+        }
+
         return Response.ok(account).build();
     }
 }

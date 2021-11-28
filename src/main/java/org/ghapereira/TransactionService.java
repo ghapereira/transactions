@@ -10,6 +10,8 @@ import org.ghapereira.repository.TransactionRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import java.time.LocalDateTime;
+
 @ApplicationScoped
 public class TransactionService {
     @Inject
@@ -30,16 +32,10 @@ public class TransactionService {
         }
 
         transaction.account = existingAccount;
+
+        transaction.setEventDate(LocalDateTime.now());
         transactionRepository.persist(transaction);
 
         return transaction;
-    }
-
-    public String modifyAccount(int id) {
-        return "OK, " + id;
-    }
-
-    public String limitsTest() {
-        return "OK, got limits";
     }
 }

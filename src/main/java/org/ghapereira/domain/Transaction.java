@@ -12,11 +12,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity(name="transaction")
 public class Transaction extends PanacheEntity {
+    @JsonProperty(required = true)
     private int operationTypeId;
+
+    @JsonProperty(required = true)
     private float amount;
+
     private LocalDateTime eventDate;
 
     @ManyToOne(fetch=FetchType.LAZY, targetEntity=Account.class)
@@ -38,6 +43,10 @@ public class Transaction extends PanacheEntity {
 
     public float getAmount() {
         return this.amount;
+    }
+
+    public void setEventDate(LocalDateTime eventDate) {
+        this.eventDate = eventDate;
     }
 
     public LocalDateTime getEventDate() {

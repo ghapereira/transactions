@@ -27,7 +27,24 @@ You can run your application in dev mode that enables live coding using:
 ./mvnw compile quarkus:dev
 ```
 
+### Debug
+
+For debugging on VSCode on dev mode, attach the following configuration to your `launch.json` config file:
+
+```javascript
+    {
+        "type": "java",
+        "name": "Remote Debug (Attach Quarkus)",
+        "request": "attach",
+        "hostName": "localhost",
+        "port": 5005
+    }
+```
+
+[source](https://suedbroecker.net/2021/04/29/configure-the-attach-debug-for-quarkus-in-visual-studio-code/)
+
 ### Docker
+
 
 ## Tests
 
