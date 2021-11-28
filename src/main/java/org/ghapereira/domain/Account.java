@@ -1,25 +1,20 @@
 package org.ghapereira.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.runtime.annotations.RegisterForReflection;
 
 import javax.persistence.Entity;
-import java.util.Optional;
+import javax.persistence.OneToMany;
 
-@RegisterForReflection
+import java.util.Set;
+
 @Entity(name="account")
 public class Account extends PanacheEntity {
     private String documentNumber;
 
-    public void setDocumentNumber(String documentNumber) {
-        this.documentNumber = documentNumber;
-    }
+    @OneToMany(mappedBy = "account", orphanRemoval = true)
+    private Set<Transaction> transactions;
 
     public String getDocumentNumber() {
         return this.documentNumber;
-    }
-
-    public static Optional<Account> findByDocumentNumber(String documentNumber) {
-        return Optional.ofNullable(find("documentNumber", documentNumber).firstResult());
     }
 }

@@ -13,6 +13,8 @@ Explain application.properties:
     https://access.redhat.com/documentation/en-us/red_hat_build_of_quarkus/1.7/html-single/configuring_data_sources_in_your_quarkus_applications/index
     https://quarkus.io/guides/datasource#jdbc-datasource
 
+Entities as defined in https://quarkus.io/guides/hibernate-orm-panache#solution-2-using-the-repository-pattern
+
 #### Dev mode
 
 Start with `./start-database.sh`. Once started, enter with `docker exec -it dev-postgres bash`. Then, to enter in the database itself, use `psql -U postgres`
