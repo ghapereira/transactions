@@ -1,4 +1,4 @@
-package org.ghapereira;
+package org.ghapereira.services;
 
 import org.ghapereira.domain.Account;
 import org.ghapereira.domain.OperationTypes;

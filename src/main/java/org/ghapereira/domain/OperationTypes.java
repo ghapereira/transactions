@@ -1,7 +1,6 @@
 package org.ghapereira.domain;
 
-import org.ghapereira.Constants;
-import org.ghapereira.exceptions.BusinessException;
+import org.ghapereira.utils.Constants;
 
 import java.util.Arrays;
 import java.util.HashSet;

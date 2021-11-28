@@ -1,6 +1,7 @@
 package org.ghapereira;
 
 import org.ghapereira.domain.OperationTypes;
+import org.ghapereira.utils.Constants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

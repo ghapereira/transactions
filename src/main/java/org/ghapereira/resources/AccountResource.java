@@ -1,7 +1,10 @@
-package org.ghapereira;
+package org.ghapereira.resources;
 
 import org.ghapereira.domain.Account;
 import org.ghapereira.exceptions.BusinessException;
+import org.ghapereira.services.AccountService;
+import org.ghapereira.utils.Constants;
+import org.ghapereira.utils.ErrorEntity;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -11,7 +14,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -28,12 +30,15 @@ public class AccountResource {
         try {
             accountService.createAccount(account);
         } catch (BusinessException b) {
-            throw new WebApplicationException(b.getMessage(), 422);
+            ErrorEntity errorEntity = new ErrorEntity(b.getMessage());
+
+            return Response.status(Constants.HTTP_STATUS_UNPROCESSABLE_ENTITY)
+                    .type(MediaType.APPLICATION_JSON)
+                    .entity(errorEntity)
+                    .build();
         }
 
-        // TODO use value from library for HTTP status
-
-        return Response.ok(account).status(201).build();
+        return Response.ok(account).status(Response.Status.CREATED).build();
     }
 
     @Path("{id:\\d+}")
@@ -45,7 +50,12 @@ public class AccountResource {
         try {
             account = accountService.getAccountInfo(id);
         } catch (BusinessException b) {
-            throw new WebApplicationException(b.getMessage(), 422);
+            ErrorEntity errorEntity = new ErrorEntity(b.getMessage());
+
+            return Response.status(Constants.HTTP_STATUS_UNPROCESSABLE_ENTITY)
+                    .type(MediaType.APPLICATION_JSON)
+                    .entity(errorEntity)
+                    .build();
         }
 
         return Response.ok(account).build();

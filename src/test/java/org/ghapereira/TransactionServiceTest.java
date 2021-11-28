@@ -1,9 +1,10 @@
 package org.ghapereira;
 
-import org.ghapereira.Constants;
 import org.ghapereira.domain.OperationTypes;
 import org.ghapereira.domain.Transaction;
 import org.ghapereira.exceptions.BusinessException;
+import org.ghapereira.services.TransactionService;
+import org.ghapereira.utils.Constants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
