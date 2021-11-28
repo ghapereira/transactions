@@ -21,9 +21,7 @@ public class TransactionService {
     AccountRepository accountRepository;
 
     public Transaction createTransaction(Transaction transaction) throws BusinessException {
-        if (!OperationTypes.validCodes.contains(transaction.getOperationTypeId())) {
-            throw new BusinessException("Invalid operationTypeId '" + transaction.getOperationTypeId() + "'");
-        }
+        this.validateOperation(transaction);
 
         Account existingAccount = accountRepository.findById(transaction.accountId);
 
@@ -37,5 +35,22 @@ public class TransactionService {
         transactionRepository.persist(transaction);
 
         return transaction;
+    }
+
+    private void validateOperation(Transaction transaction) throws BusinessException {
+        int operationTypeId = transaction.getOperationTypeId();
+
+        if (!OperationTypes.validCodes.contains(operationTypeId)) {
+            throw new BusinessException("Invalid operationTypeId '" + operationTypeId + "'");
+        }
+
+        boolean isNegativeCode = OperationTypes.negativeCodes.contains(operationTypeId);
+        boolean isInvalidNegative = isNegativeCode && transaction.getAmount() > 0;
+
+        boolean isPositiveCode = OperationTypes.positiveCodes.contains(operationTypeId);
+        boolean isInvalidPositive = isPositiveCode && transaction.getAmount() < 0;
+        if (isInvalidNegative || isInvalidPositive) {
+            throw new BusinessException("Invalid amount '" + transaction.getAmount() + "' for operation type " + operationTypeId);
+        }
     }
 }

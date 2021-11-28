@@ -14,11 +14,21 @@ public enum OperationTypes {
 
     private final int operationCode;
 
-    public static final Set<Integer> validCodes = new HashSet<Integer>(Arrays.asList(
+    public static final Set<Integer> validCodes = new HashSet<>(Arrays.asList(
         Constants.SINGLE_INSTALLMENT,
         Constants.MULTIPLE_INSTALLMENTS,
         Constants.CASH_WITHDRAWAL,
         Constants.PAYMENT
+    ));
+
+    public static final Set<Integer> positiveCodes = new HashSet<>(Arrays.asList(
+        Constants.PAYMENT
+    ));
+
+    public static final Set<Integer> negativeCodes = new HashSet<>(Arrays.asList(
+        Constants.SINGLE_INSTALLMENT,
+        Constants.MULTIPLE_INSTALLMENTS,
+        Constants.CASH_WITHDRAWAL
     ));
 
     private OperationTypes(int operationCode) {

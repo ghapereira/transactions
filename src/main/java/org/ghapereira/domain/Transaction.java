@@ -41,6 +41,10 @@ public class Transaction extends PanacheEntity {
         this.operationTypeId = operationTypeId;
     }
 
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
     public float getAmount() {
         return this.amount;
     }
