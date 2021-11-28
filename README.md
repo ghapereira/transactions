@@ -9,6 +9,12 @@ Simulate a financial environment in terms of processing transactions on accounts
 ### Database
 
 The database used is PostgreSQL, via Docker, as per [this tutorial](https://renatogroffe.medium.com/postgresql-pgadmin-4-docker-compose-montando-rapidamente-um-ambiente-para-uso-55a2ab230b89). It is setup via Docker compose: `docker-compose up -d`
+
+When starting for the first time, you need to manually create the database:
+
+```SQL
+CREATE DATABASE quarkus;
+```
 Explain application.properties:
     https://access.redhat.com/documentation/en-us/red_hat_build_of_quarkus/1.7/html-single/configuring_data_sources_in_your_quarkus_applications/index
     https://quarkus.io/guides/datasource#jdbc-datasource
