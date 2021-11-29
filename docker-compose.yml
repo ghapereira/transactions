@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ~/dev/transactions/postgres-data:/var/lib/postgresql/data
+      - /tmp/data/postgres-data:/var/lib/postgresql/data
     networks:
       - postgres-compose-network
 

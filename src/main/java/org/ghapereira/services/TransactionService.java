@@ -46,11 +46,14 @@ public class TransactionService {
 
         boolean isNegativeCode = OperationTypes.negativeCodes.contains(operationTypeId);
         boolean isInvalidNegative = isNegativeCode && transaction.getAmount() > 0;
+        if (isInvalidNegative) {
+            throw new BusinessException("Operation type " + operationTypeId + " requires a negative amount");
+        }
 
         boolean isPositiveCode = OperationTypes.positiveCodes.contains(operationTypeId);
         boolean isInvalidPositive = isPositiveCode && transaction.getAmount() < 0;
-        if (isInvalidNegative || isInvalidPositive) {
-            throw new BusinessException("Invalid amount '" + transaction.getAmount() + "' for operation type " + operationTypeId);
+        if (isInvalidPositive) {
+            throw new BusinessException("Operation type " + operationTypeId + " requires a positive amount");
         }
     }
 }
