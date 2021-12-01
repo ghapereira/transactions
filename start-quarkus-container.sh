@@ -10,4 +10,4 @@ IMAGE_NAME=transactions
 docker build -f src/main/docker/Dockerfile.native -t $IMAGE_NAME .
 
 # Run the container; network "host" needed to access database on localhost
-docker run --network="host" -i --rm -p 8080:8080 $IMAGE_NAME
+docker run --network="host" -i --rm -p 8080:8080 --env-file .env $IMAGE_NAME
