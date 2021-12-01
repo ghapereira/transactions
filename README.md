@@ -68,7 +68,7 @@ To run the application as a Docker container, use the script `start-quarkus-cont
 
 ## Tests
 
-To run the tests from the command line, in the root directory use the command `mvn verify`. You can also, on your IDE, run the tests individually (tested in VSCode). In order to test, comment all the `QUARKUS_DATABASE_*` and `QUARKUS_HIBERNATE_*` environment variables in the `.env` file, leaving the `QUARKUS_DATASOURCE_DEVSERVICES_ENABLED` as `true`. This will create a testing database, that can be used in the tests.
+To run the tests from the command line, in the root directory use the command `mvn verify`. You can also, on your IDE, run the tests individually (tested in VSCode). In order to test, comment all the `QUARKUS_DATABASE_*` and `QUARKUS_HIBERNATE_*` environment variables in the `.env` file, leaving the `QUARKUS_DATASOURCE_DEVSERVICES_ENABLED` as `true`. This will create a testing database, that can be used in the tests. Coverage reports are available, after the test, in `target/jacoco-report`, as per the [documentation](https://quarkus.io/guides/tests-with-coverage).
 
 ## Contributing
 
