@@ -9,7 +9,6 @@ import io.restassured.response.Response;
 
 @QuarkusTest
 public class TransactionTest {
-
     @Test
     public void testGetAccountsInfoOnlyAcceptsIntegers() {
         given()

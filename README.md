@@ -15,7 +15,7 @@ Simulate a financial environment in terms of processing transactions on accounts
 * It is not mandatory, but using a IDE helps developing the project. I am using VisualStudio Code, and created the project using the `Quarkus Tools for Visual Studio Code` extension to create it.
 
 
-### Database (dev mode)
+### Database
 
 The database used is PostgreSQL, via Docker, as per [this tutorial](https://renatogroffe.medium.com/postgresql-pgadmin-4-docker-compose-montando-rapidamente-um-ambiente-para-uso-55a2ab230b89). It is setup via Docker, using the script `start-database.sh`
 
@@ -32,9 +32,9 @@ and manually create the database:
 CREATE DATABASE quarkus;
 ```
 
-Every time the application is restarted the database columns are dropped and created again. To avoid this, in the `resources/application.properties` file, change the `quarkus.hibernate-orm.database.generation` parameter from `drop-and-create` to `update`. More details in the documentation [[1](https://quarkus.io/guides/datasource#jdbc-datasource)], [[2](https://access.redhat.com/documentation/en-us/red_hat_build_of_quarkus/1.7/html-single/configuring_data_sources_in_your_quarkus_applications/index)]
+Every time the application is restarted the database columns are dropped and created again. To avoid this, in the `.env` file, change the `QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION` parameter from `drop-and-create` to `update`. More details in the documentation [[1](https://quarkus.io/guides/datasource#jdbc-datasource)], [[2](https://access.redhat.com/documentation/en-us/red_hat_build_of_quarkus/1.7/html-single/configuring_data_sources_in_your_quarkus_applications/index)]
 
-### Dev mode
+### Database on dev mode
 
 Info from [here](https://hub.docker.com/_/postgres)
 You can run your application in dev mode that enables live coding using:
@@ -43,6 +43,8 @@ You can run your application in dev mode that enables live coding using:
 ```
 
 The application restarts automagically when files are changed. As explained in the [design decisions](#design-decisions) section, if you keep the default configurations this will reset the data on each restart. Refer to the aforementioned section to know how to change this behavior.
+
+The project uses environment variables. On dev mode, the [`.env` file method](https://quarkus.io/guides/config-reference#env-file) is used, and on deploying externally it should rely on [environment variables](https://12factor.net/config). A file named `sample.env` is available for testing; to use it, simply rename it to `.env` and Quarkus will load it automatically. It is not recommended to leave production values on it, so be careful.
 
 ### Debug
 
@@ -62,11 +64,11 @@ For debugging on VSCode on dev mode, attach the following configuration to your 
 
 ### Docker
 
-To run the application as a Docker container, use the script `start-quarkus-container.sh`.
+To run the application as a Docker container, use the script `start-quarkus-container.sh`. (Broken in this branch; see [technical debts](#technical-debts))
 
 ## Tests
 
-To run the tests from the command line, in the root directory use the command `mvn verify`. You can also, on your IDE, run the tests individually (tested in VSCode). As explained in the [technical debts](#technical-debts) section, you need to have the database container running to be able to run the tests, until I figure out the service mocks.
+To run the tests from the command line, in the root directory use the command `mvn verify`. You can also, on your IDE, run the tests individually (tested in VSCode). In order to test, comment all the `QUARKUS_DATABASE_*` and `QUARKUS_HIBERNATE_*` environment variables in the `.env` file, leaving the `QUARKUS_DATASOURCE_DEVSERVICES_ENABLED` as `true`. This will create a testing database, that can be used in the tests.
 
 ## Contributing
 
@@ -104,11 +106,8 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Technical debts
 
-* At the current point of development, I still have not figured out exactly how to mock my services to avoid the creation of repositories, so to run the tests the database need to be up and running. The current tests do not write to it, but a connection is needed nevertheless. I'm working to fix this, but until then, to run the tests the database is needed.
-
 * The docker-compose is broken, prefer to build and run each container separately
 
-* The database password and username are in plaintext on the database start script and `application.properties` file. This is certainly not how it should be done. In a better environment, the file would only be uploaded, and a dummy development file such as the existent one should be used.
-    * A better way yet is to load environment variables to populate the properties file. I do not know how to do this at the moment.
-
 * Database ids are exposed as account and transaction ids. This is not a good practice: database ids should be hidden from the user, and instead a generated uuid should be exposed. For simplicity I kept the id for now.
+
+* Docker is broken in this branch, consuming a ton of memory and not getting past the JBoss threads step. Working to fix it.
