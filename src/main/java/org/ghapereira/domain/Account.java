@@ -17,4 +17,8 @@ public class Account extends PanacheEntity {
     public String getDocumentNumber() {
         return this.documentNumber;
     }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
 }

@@ -11,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @ApplicationScoped
 public class TransactionService {
@@ -55,5 +56,9 @@ public class TransactionService {
         if (isInvalidPositive) {
             throw new BusinessException("Operation type " + operationTypeId + " requires a positive amount");
         }
+    }
+
+    public List<Transaction> getAccountTransactions(Long accountId) {
+        return transactionRepository.findByAccountNumber(accountId);
     }
 }

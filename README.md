@@ -111,3 +111,5 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 * Database ids are exposed as account and transaction ids. This is not a good practice: database ids should be hidden from the user, and instead a generated uuid should be exposed. For simplicity I kept the id for now.
 
 * Docker build is consuming a ton more memory and taking a lot more after I stopped using `application.properties`.
+
+* The Balance entity should have a field for showing when the balance was calculated, and probably something more robust to avoid fraud on the calculation/sending

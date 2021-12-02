@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "03672ea3-f5a2-425a-8948-d84703c8b0c6",
+		"_postman_id": "cc3b3b31-0fd0-4674-be4d-f9c30d3ed13b",
 		"name": "Transaction",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"document_number\": \"x2100\"\n}",
+					"raw": "{\n    \"documentNumber\": \"x2100\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,7 +60,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"account_id\": 1,\n    \"operation_type_id\": 4,\n    \"amount\": 123.45\n}",
+					"raw": "{\n    \"accountId\": 1,\n    \"operationTypeId\": 4,\n    \"amount\": 123.45\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,6 +76,26 @@
 					"path": [
 						"{{api_version}}",
 						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBalance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/{{api_version}}/balance/{{account_id}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"balance",
+						"{{account_id}}"
 					]
 				}
 			},

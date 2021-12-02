@@ -11,7 +11,7 @@ import java.util.List;
 @ApplicationScoped
 public class TransactionRepository implements PanacheRepository<Transaction> {
     public List<Transaction> findByAccountNumber(Long accountNumber) {
-        return find("accountNumber", accountNumber).list();
+        return find("account_id", accountNumber).list();
     }
 
 }
