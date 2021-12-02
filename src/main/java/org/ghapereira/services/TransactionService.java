@@ -24,6 +24,11 @@ public class TransactionService {
     public Transaction createTransaction(Transaction transaction) throws BusinessException {
         this.validateOperation(transaction);
 
+        if (OperationTypes.negativeCodes.contains(transaction.getOperationTypeId())) {
+            float currentAmount = transaction.getAmount();
+            transaction.setAmount(-currentAmount);
+        }
+
         Account existingAccount = accountRepository.findById(transaction.accountId);
 
         if (existingAccount == null) {
@@ -32,6 +37,8 @@ public class TransactionService {
 
         transaction.account = existingAccount;
 
+        this.validateAndProcessTransaction(transaction);
+
         transaction.setEventDate(LocalDateTime.now());
         transactionRepository.persist(transaction);
 
@@ -39,26 +46,21 @@ public class TransactionService {
     }
 
     private void validateOperation(Transaction transaction) throws BusinessException {
-        int operationTypeId = transaction.getOperationTypeId();
-
-        if (!OperationTypes.validCodes.contains(operationTypeId)) {
-            throw new BusinessException("Invalid operationTypeId '" + operationTypeId + "'");
-        }
-
-        boolean isNegativeCode = OperationTypes.negativeCodes.contains(operationTypeId);
-        boolean isInvalidNegative = isNegativeCode && transaction.getAmount() > 0;
-        if (isInvalidNegative) {
-            throw new BusinessException("Operation type " + operationTypeId + " requires a negative amount");
-        }
-
-        boolean isPositiveCode = OperationTypes.positiveCodes.contains(operationTypeId);
-        boolean isInvalidPositive = isPositiveCode && transaction.getAmount() < 0;
-        if (isInvalidPositive) {
-            throw new BusinessException("Operation type " + operationTypeId + " requires a positive amount");
+        if (transaction.getAmount() < 0) {
+            throw new BusinessException("Transaction amounts should always be positive");
         }
     }
 
     public List<Transaction> getAccountTransactions(Long accountId) {
         return transactionRepository.findByAccountNumber(accountId);
+    }
+
+    private void validateAndProcessTransaction(Transaction transaction) throws BusinessException {
+        float operationResult = transaction.account.getAvailableCreditLimit() + transaction.getAmount();
+        if (operationResult < 0) {
+            throw new BusinessException("Transaction cannot be completed due to lack of funds");
+        }
+
+        transaction.account.changeCreditLimit(transaction.getAmount());
     }
 }

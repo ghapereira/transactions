@@ -17,6 +17,10 @@ public class AccountService {
             throw new BusinessException("Cannot create account without a valid document number");
         }
 
+        if (account.getAvailableCreditLimit() < 0) {
+            throw new BusinessException("Cannot create account with negative funds");
+        }
+
         accountRepository.persist(account);
 
         return account;

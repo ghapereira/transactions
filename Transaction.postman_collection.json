@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"documentNumber\": \"x2100\"\n}",
+					"raw": "{\n    \"documentNumber\": \"01234\",\n    \"availableCreditLimit\": 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,7 +39,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}/{{api_version}}/accounts/{{account_id}}",
+					"raw": "http://{{host}}/{{api_version}}/accounts/1",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -47,7 +47,7 @@
 					"path": [
 						"{{api_version}}",
 						"accounts",
-						"{{account_id}}"
+						"1"
 					]
 				}
 			},
@@ -60,7 +60,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"accountId\": 1,\n    \"operationTypeId\": 4,\n    \"amount\": 123.45\n}",
+					"raw": "{\n    \"accountId\": 1,\n    \"operationTypeId\": 4,\n    \"amount\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
